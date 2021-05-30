@@ -1,6 +1,6 @@
 # MediaWiki ShortURL Builder
 
-This tool is used to automatically build a MediaWiki Short URL configuration for any public MediaWiki installation just by scanning the publicly available configuration.
+This tool is used to automatically build a MediaWiki [Short URL](https://www.mediawiki.org/wiki/Manual:Short_URL) configuration for any public MediaWiki installation just by scanning the publicly available configuration.
 
 It was originally developed by Daniel at [Redwerks](https://redwerks.org/) in Ruby. This is a React/JavaScript port of the original project.
 
