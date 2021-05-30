@@ -11,6 +11,7 @@ export const LayoutFooter = experimentalStyled('footer', {
   '& ul': {
     display: 'block',
     margin: 0,
+    padding: 0,
   },
   '& li': {
     display: 'inline',

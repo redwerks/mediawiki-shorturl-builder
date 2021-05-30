@@ -12,6 +12,9 @@ export const ThemeRoot = (props: ThemeRootProps) => {
     return createTheme({
       palette: {
         mode: 'light',
+        background: {
+          default: '#f8f8f8',
+        },
       },
     });
   }, []);

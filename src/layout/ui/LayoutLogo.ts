@@ -3,6 +3,7 @@ import { experimentalStyled } from '@material-ui/core/styles';
 export const LayoutLogo = experimentalStyled('div', {
   label: 'LayoutLogo',
 })(({ theme }) => ({
+  gridArea: 'logo',
   margin: '45px 0',
   position: 'relative',
 
@@ -24,10 +25,6 @@ export const LayoutLogo = experimentalStyled('div', {
     top: '52px',
     left: '150px',
   },
-  '& h1': {
-    float: 'right',
-  },
-
   [theme.breakpoints.down('sm')]: {
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
