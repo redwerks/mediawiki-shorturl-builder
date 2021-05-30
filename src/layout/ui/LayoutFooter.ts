@@ -6,11 +6,11 @@ export const LayoutFooter = experimentalStyled('footer', {
   display: 'inline-block',
   boxSizing: 'border-box',
   width: '100%',
-  padding: '20px',
+  padding: theme.spacing(2),
 
   '& ul': {
     display: 'block',
-    margin: '0',
+    margin: 0,
   },
   '& li': {
     display: 'inline',
@@ -18,10 +18,6 @@ export const LayoutFooter = experimentalStyled('footer', {
       content: '" • "',
     },
     '&:first-child:before': { visibility: 'collapse' },
-  },
-  '& a': {
-    color: '#333',
-    textDecoration: 'none',
   },
 
   [theme.breakpoints.down('sm')]: {

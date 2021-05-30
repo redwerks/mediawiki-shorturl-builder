@@ -29,7 +29,7 @@ export const LayoutLogo = experimentalStyled('div', {
   },
 
   [theme.breakpoints.down('sm')]: {
-    marginTop: '20px',
-    marginBottom: '20px',
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   },
 }));

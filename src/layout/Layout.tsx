@@ -1,4 +1,4 @@
-import { CssBaseline, Link as MuiLink } from '@material-ui/core';
+import { CssBaseline, Link as MuiLink, Typography } from '@material-ui/core';
 import { ReactNode } from 'react';
 import { LayoutBody, LayoutFooter, LayoutHeader, LayoutLogo } from './ui';
 import { FeedbackTab } from './ui/FeedbackTab';
@@ -19,7 +19,9 @@ export const Layout = (props: LayoutProps) => {
       <CssBaseline />
       <LayoutHeader id="header">
         <LayoutLogo id="logo">
-          <h1>MediaWiki ShortURL Builder</h1>
+          <Typography component="h1" variant="h5">
+            MediaWiki ShortURL Builder
+          </Typography>
           <a href="/">
             <img alt="Redwerks" src="/resources/redwerks-blog-logo.png" />
             {isAlpha ? (
@@ -34,10 +36,14 @@ export const Layout = (props: LayoutProps) => {
       <LayoutFooter id="footer">
         <ul>
           <li>
-            <MuiLink href="http://redwerks.org/">Redwerks.org</MuiLink>
+            <MuiLink color="text.secondary" href="http://redwerks.org/">
+              Redwerks.org
+            </MuiLink>
           </li>
           <li>
-            <MuiLink href="http://blog.redwerks.org/">Redwerks Blog</MuiLink>
+            <MuiLink color="text.secondary" href="http://blog.redwerks.org/">
+              Redwerks Blog
+            </MuiLink>
           </li>
         </ul>
       </LayoutFooter>

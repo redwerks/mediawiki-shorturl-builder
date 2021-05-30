@@ -1,4 +1,5 @@
 import { experimentalStyled } from '@material-ui/core/styles';
+import { dark, light } from '@material-ui/core/styles/createPalette';
 
 export const FeedbackTab = experimentalStyled('a', {
   label: 'FeedbackTab',
@@ -6,11 +7,10 @@ export const FeedbackTab = experimentalStyled('a', {
   position: 'fixed',
   bottom: 0,
   right: '10%',
-  padding: '10px 10px',
+  padding: theme.spacing(1.5),
   backgroundColor: '#222',
-  color: '#fff',
-  fontSize: 14,
-  fontWeight: 500,
+  color: theme.palette.mode === 'dark' ? light.text.primary : dark.text.primary,
+  ...theme.typography.body2,
   lineHeight: 1,
   textDecoration: 'none !important',
 
