@@ -1,5 +1,6 @@
 import { ServerDetectionError, ServerError } from '../api/error';
 import { getDetectionError } from './detection';
+import { getServerStackError } from './server';
 import { ErrorBoxInfo } from './types';
 export * from './ErrorBox';
 
@@ -10,12 +11,8 @@ export function getServerError(
   error: ServerError | ServerDetectionError
 ): ErrorBoxInfo {
   if ('error' in error) {
+    return getServerStackError(error);
   } else {
     return getDetectionError(error);
   }
-
-  return {
-    title: 'Unexpected error',
-    message: 'An unexpected error has occurred.',
-  };
 }

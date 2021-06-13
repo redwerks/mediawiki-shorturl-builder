@@ -13,7 +13,7 @@ export const api = axios.create({
 /**
  * Convert network errors into detection errors
  */
-export function convertNetworkError(error: unknown): unknown {
+export function convertNetworkError(error: any): any {
   try {
     if (axios.isAxiosError(error) && error.response?.status)
       throwDetectionError(

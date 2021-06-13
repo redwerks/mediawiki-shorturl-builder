@@ -15,8 +15,8 @@ export default async (
     const serverdata = await detect(Array.isArray(url) ? url[0] : url);
 
     res.status(200).json(serverdata);
-  } catch (error) {
-    error = convertNetworkError(error);
+  } catch (err) {
+    const error = convertNetworkError(err);
 
     if (error instanceof DetectionError) {
       res.status(400).json(error);
@@ -25,7 +25,7 @@ export default async (
 
     res.status(500).json({
       message: 'Unexpected server error',
-      error: { ...error, stack: error.stack },
+      error: { ...error, message: error.message, stack: error.stack },
     });
   }
 };

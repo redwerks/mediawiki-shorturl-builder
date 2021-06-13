@@ -15,8 +15,8 @@ export const handler: Handler = async (event) => {
       statusCode: 200,
       body: JSON.stringify(serverdata),
     };
-  } catch (error) {
-    error = convertNetworkError(error);
+  } catch (err) {
+    const error = convertNetworkError(err);
 
     if (error instanceof DetectionError) {
       return { statusCode: 400, body: JSON.stringify(error) };
@@ -26,7 +26,7 @@ export const handler: Handler = async (event) => {
       statusCode: 500,
       body: JSON.stringify({
         message: 'Unexpected server error',
-        error: { ...error, stack: error.stack },
+        error: { ...error, message: error.message, stack: error.stack },
       }),
     };
   }
