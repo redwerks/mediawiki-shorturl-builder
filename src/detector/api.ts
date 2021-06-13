@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { isNodeError, isSysCallError } from '../utils/isNodeError';
 import { throwDetectionError } from './error';
 
@@ -41,12 +41,8 @@ export function convertNetworkError(error: unknown): unknown {
         'Server redirected too many times.'
       );
 
-    // @todo Add handling for the maxRedirects error
-
     throw error;
   } catch (e) {
     return e;
   }
 }
-
-// @todo Replace http/net errors with detection errors

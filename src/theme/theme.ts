@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider } from '@material-ui/core';
+import { colors, createTheme, ThemeProvider } from '@material-ui/core';
 import { createElement, ReactNode, useMemo } from 'react';
 
 export interface ThemeRootProps {
@@ -14,6 +14,15 @@ export const ThemeRoot = (props: ThemeRootProps) => {
         mode: 'light',
         background: {
           default: '#f8f8f8',
+        },
+      },
+      components: {
+        MuiAlert: {
+          styleOverrides: {
+            standardWarning: {
+              backgroundColor: colors.yellow[100],
+            },
+          },
         },
       },
     });

@@ -1,10 +1,3 @@
-import { Box, experimentalStyled, TextField } from '@material-ui/core';
-import { LoadingButton } from '@material-ui/lab';
-import axios from 'axios';
-import invariant from 'invariant';
-import { FormEvent, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { apiDetect } from '../api';
 import StepArticlepath from '../image/step-articlepath.png';
 import StepConfigure from '../image/step-configure.png';
 import StepDiscovery from '../image/step-discovery.png';
@@ -13,90 +6,12 @@ import StepUrl from '../image/step-url.png';
 import { Layout } from '../layout/Layout';
 import { MediaBox } from '../ui';
 import { MediaBoxList } from '../ui/MediaBox';
-
-const UrlField = experimentalStyled(TextField, { label: 'UrlField' })(
-  ({ theme }) => ({
-    flex: 1,
-    '& .MuiOutlinedInput-input': {
-      ...theme.typography.body1,
-      padding: `${theme.spacing(1.5)} ${theme.spacing(2)}`,
-    },
-  })
-);
+import { UrlForm } from '../urlform/UrlForm';
 
 const HomeRoute = () => {
-  const [query, setSearchParams] = useSearchParams({});
-  const [submitting, setSubmitting] = useState(false);
-  const [url, setUrl] = useState(query.get('url'));
-
-  const submit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    invariant(url, 'url is required');
-
-    setSubmitting(true);
-    try {
-      const serverData = await apiDetect(url);
-      setSearchParams(
-        { url },
-        {
-          state: {
-            url,
-            serverData,
-          },
-        }
-      );
-    } catch (e) {
-      if (axios.isAxiosError(e)) {
-        setSearchParams(
-          { url },
-          {
-            state: {
-              url,
-              error: e.response?.data,
-            },
-          }
-        );
-      } else {
-        // @fixme Display a large error snackbar with more information available
-        throw e;
-      }
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
   return (
     <Layout>
-      <Box
-        component="form"
-        action="/"
-        method="get"
-        sx={{ marginBottom: 2 }}
-        onSubmit={submit}
-      >
-        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-          <UrlField
-            type="url"
-            name="url"
-            label="Your Wiki's URL"
-            placeholder="http://mywiki.com/index.php?title=Main_Page"
-            required
-            disabled={submitting}
-            fullWidth
-            InputLabelProps={{ shrink: true }}
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-          />
-          <LoadingButton
-            type="submit"
-            variant="contained"
-            sx={{ marginLeft: 1 }}
-            loading={submitting}
-          >
-            Go
-          </LoadingButton>
-        </Box>
-      </Box>
+      <UrlForm />
 
       <MediaBoxList className="mediaboxlist">
         <MediaBox
