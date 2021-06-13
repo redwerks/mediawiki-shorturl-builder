@@ -1,6 +1,7 @@
 import { ServerDetectionError, ServerError } from '../api/error';
 import { getDetectionError } from './detection';
 import { ErrorBoxInfo } from './types';
+export * from './ErrorBox';
 
 /**
  * Get a title and message for a server error

@@ -1,6 +1,5 @@
-import { Alert, AlertTitle } from '@material-ui/core';
-import { ServerError, ServerDetectionError } from '../api/error';
-import { getServerError } from '../error-message';
+import { ServerDetectionError, ServerError } from '../api/error';
+import { ErrorBox, getServerError } from '../error-message';
 import { Layout } from '../layout/Layout';
 import { UrlForm } from '../urlform/UrlForm';
 
@@ -14,10 +13,9 @@ const ServerErrorRoute = (props: ServerErrorRouteProps) => {
 
   return (
     <Layout>
-      <Alert severity="warning" elevation={1} sx={{ marginBottom: 4 }}>
-        <AlertTitle>{title}</AlertTitle>
+      <ErrorBox severity="warning" sx={{ marginBottom: 4 }} title={title}>
         {message}
-      </Alert>
+      </ErrorBox>
 
       <UrlForm />
     </Layout>
