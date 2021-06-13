@@ -1,10 +1,13 @@
-import Home from './routes/Home';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppRoutes from './routes';
 import { ThemeRoot } from './theme';
 
 const App = () => {
   return (
     <ThemeRoot>
-      <Home />
+      <Router>
+        <AppRoutes />
+      </Router>
     </ThemeRoot>
   );
 };

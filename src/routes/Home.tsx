@@ -1,13 +1,18 @@
-import { Box, Button, experimentalStyled, TextField } from '@material-ui/core';
-import { useState } from 'react';
+import { Box, experimentalStyled, TextField } from '@material-ui/core';
+import { LoadingButton } from '@material-ui/lab';
+import axios from 'axios';
+import invariant from 'invariant';
+import { FormEvent, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { apiDetect } from '../api';
+import StepArticlepath from '../image/step-articlepath.png';
+import StepConfigure from '../image/step-configure.png';
+import StepDiscovery from '../image/step-discovery.png';
+import StepInstall from '../image/step-install.png';
+import StepUrl from '../image/step-url.png';
 import { Layout } from '../layout/Layout';
 import { MediaBox } from '../ui';
 import { MediaBoxList } from '../ui/MediaBox';
-import StepInstall from '../image/step-install.png';
-import StepUrl from '../image/step-url.png';
-import StepDiscovery from '../image/step-discovery.png';
-import StepArticlepath from '../image/step-articlepath.png';
-import StepConfigure from '../image/step-configure.png';
 
 const UrlField = experimentalStyled(TextField, { label: 'UrlField' })(
   ({ theme }) => ({
@@ -19,28 +24,77 @@ const UrlField = experimentalStyled(TextField, { label: 'UrlField' })(
   })
 );
 
-const Home = () => {
-  const [url, setUrl] = useState(
-    () => new URL(window.location.href).searchParams.get('url') ?? ''
-  );
+const HomeRoute = () => {
+  const [query, setSearchParams] = useSearchParams({});
+  const [submitting, setSubmitting] = useState(false);
+  const [url, setUrl] = useState(query.get('url'));
+
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    invariant(url, 'url is required');
+
+    setSubmitting(true);
+    try {
+      const serverData = await apiDetect(url);
+      setSearchParams(
+        { url },
+        {
+          state: {
+            url,
+            serverData,
+          },
+        }
+      );
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        setSearchParams(
+          { url },
+          {
+            state: {
+              url,
+              error: e.response?.data,
+            },
+          }
+        );
+      } else {
+        // @fixme Display a large error snackbar with more information available
+        throw e;
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <Layout>
-      <Box component="form" action="/" method="get" sx={{ marginBottom: 2 }}>
+      <Box
+        component="form"
+        action="/"
+        method="get"
+        sx={{ marginBottom: 2 }}
+        onSubmit={submit}
+      >
         <Box sx={{ display: 'flex', flexDirection: 'row' }}>
           <UrlField
             type="url"
             name="url"
             label="Your Wiki's URL"
             placeholder="http://mywiki.com/index.php?title=Main_Page"
+            required
+            disabled={submitting}
             fullWidth
             InputLabelProps={{ shrink: true }}
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
-          <Button variant="contained" sx={{ marginLeft: 1 }}>
+          <LoadingButton
+            type="submit"
+            variant="contained"
+            sx={{ marginLeft: 1 }}
+            loading={submitting}
+          >
             Go
-          </Button>
+          </LoadingButton>
         </Box>
       </Box>
 
@@ -77,4 +131,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeRoute;
