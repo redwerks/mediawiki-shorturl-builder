@@ -53,15 +53,19 @@ export const Layout = (props: LayoutProps) => {
         <LayoutFooter id="footer">
           <ul>
             <li>
-              <MuiLink color="text.secondary" href="http://redwerks.org/">
+              <MuiLink color="text.secondary" href="https://redwerks.org/">
                 Redwerks.org
               </MuiLink>
             </li>
             <li>
-              <MuiLink color="text.secondary" href="http://blog.redwerks.org/">
-                Redwerks Blog
+              <MuiLink
+                color="text.secondary"
+                href="https://github.com/redwerks/mediawiki-shorturl-builder"
+              >
+                GitHub / Source
               </MuiLink>
             </li>
+            <li>React app written by Daniel at Redwerks</li>
           </ul>
         </LayoutFooter>
       </LayoutContainer>
