@@ -71,7 +71,7 @@ export const Layout = (props: LayoutProps) => {
       </LayoutContainer>
       <FeedbackTab
         id="feedback_tab"
-        href="https://productpains.com/product/mediawiki-short-url-builder/"
+        href="https://github.com/redwerks/mediawiki-shorturl-builder/issues"
         target="_blank"
         rel="noopener noreferrer"
       >
