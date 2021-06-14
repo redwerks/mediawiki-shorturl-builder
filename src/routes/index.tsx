@@ -1,9 +1,10 @@
 import { Location } from 'history';
 import { Route, Routes, useLocation } from 'react-router-dom';
+import { ServerDetectionError, ServerError } from '../api/error';
 import { ServerData } from '../detector/types';
 import HomeRoute from './Home';
+import ResultRoute from './Result';
 import ServerErrorRoute from './ServerError';
-import { ServerError, ServerDetectionError } from '../api/error';
 
 const Root = () => {
   const { state } = useLocation() as Location<{
@@ -12,7 +13,7 @@ const Root = () => {
   }>;
 
   if (state?.serverData) {
-    // @todo Handle server data with config questions and instructions
+    return <ResultRoute serverData={state.serverData} />;
   }
 
   if (state?.error) {

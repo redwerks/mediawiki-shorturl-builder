@@ -17,6 +17,19 @@ export const ThemeRoot = (props: ThemeRootProps) => {
         },
       },
       components: {
+        MuiFormControl: {
+          defaultProps: {
+            margin: 'normal',
+            fullWidth: true,
+          },
+        },
+        MuiTextField: {
+          defaultProps: {
+            margin: 'normal',
+            fullWidth: true,
+            size: 'small',
+          },
+        },
         MuiAlert: {
           styleOverrides: {
             standardWarning: {

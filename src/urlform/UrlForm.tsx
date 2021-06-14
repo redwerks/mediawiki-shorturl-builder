@@ -78,6 +78,7 @@ export const UrlForm = (props: UrlFormProps) => {
           placeholder="http://mywiki.com/index.php?title=Main_Page"
           required
           disabled={submitting}
+          margin="none"
           fullWidth
           InputLabelProps={{ shrink: true }}
           value={url}
