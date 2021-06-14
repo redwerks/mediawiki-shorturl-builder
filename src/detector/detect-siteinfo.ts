@@ -34,11 +34,10 @@ export function detectSiteInfo(
     const img = apiData.query.allimages[0];
     if (img) {
       const isPathHashed =
-        /\/images\/[0-9a-f]\/[0-9a-f]{2}\/[^/]+\.[^/.](?:\?|$)+/.test(
+        /\/images\/[0-9a-f]\/[0-9a-f]{2}\/[^/]+\.[^/.]+(?:\?|$)/.test(
           img['url']
         );
-      const isPathUnhashed = /\/images\/[^/]+\.[^/.](?:\?|$)+/.test(img['url']);
-
+      const isPathUnhashed = /\/images\/[^/]+\.[^/.]+(?:\?|$)/.test(img['url']);
       hasheduploads = isPathHashed ? true : isPathUnhashed ? false : undefined;
     }
   }
