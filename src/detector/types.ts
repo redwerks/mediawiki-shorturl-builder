@@ -1,3 +1,4 @@
+import { ServerType } from '../extractor/servers';
 // @note Excluded from index.ts so it can be shared
 
 /**
@@ -25,4 +26,8 @@ export interface ServerData {
   server?: string;
   mainpage?: string;
   hasheduploads?: boolean;
+  // Client-only overrides
+  servertype?: ServerType;
+  hasroot?: boolean;
+  modphp?: boolean;
 }

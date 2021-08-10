@@ -5,6 +5,9 @@ import { extractServerType } from './extractServerType';
  * Check whether the user has root access
  */
 export function extractHasRoot(serverData: ServerData): boolean | undefined {
+  // Override from the server config form
+  if (typeof serverData.hasroot === 'boolean') return serverData.hasroot;
+
   if (extractServerType(serverData) === 'apache') {
     // Apache can be configured with root access and without root access
     // Use Reverse DNS hostnames to guess whether the user has root access

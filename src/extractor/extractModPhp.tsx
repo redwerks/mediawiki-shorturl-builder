@@ -5,7 +5,10 @@ import { extractServerType } from './extractServerType';
  * Check whether the server is mod_php from ServerData
  */
 export function extractModPhp(serverData: ServerData): boolean | undefined {
-  const { phpsapi } = serverData;
+  const { modphp, phpsapi } = serverData;
+
+  // Override from the server config form
+  if (typeof modphp === 'boolean') return modphp;
 
   if (extractServerType(serverData) === 'apache') {
     if (phpsapi === 'apache2handler') {

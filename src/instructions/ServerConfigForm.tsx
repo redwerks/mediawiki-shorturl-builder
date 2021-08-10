@@ -18,6 +18,7 @@ import {
   extractScript,
   extractServerType,
   isServerFullyDetected,
+  ServerType,
   serverTypes,
   supportedServers,
 } from '../extractor';
@@ -32,7 +33,7 @@ const radioValue = (value: boolean | undefined): 'on' | 'off' | undefined =>
   typeof value === 'boolean' ? (value ? 'on' : 'off') : undefined;
 
 export interface ServerConfigFormValues {
-  server: string;
+  server: ServerType | '';
   script: string;
   hasheduploads: boolean | undefined;
   hasRoot: 'on' | 'off' | undefined;

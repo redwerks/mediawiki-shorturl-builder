@@ -8,7 +8,10 @@ import { ServerType } from './servers';
 export function extractServerType(
   serverData: ServerData
 ): ServerType | undefined {
-  const { phpsapi, serverinfo } = serverData;
+  const { servertype, phpsapi, serverinfo } = serverData;
+
+  // Override from the server config form
+  if (servertype) return servertype;
 
   if (phpsapi === 'apache2handler') {
     // If the apache2handler sapi is used then this is definitely apache no matter what the front end Server: says
