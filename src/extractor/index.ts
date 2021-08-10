@@ -6,6 +6,7 @@ export * from './extractMainPageUrl';
 export * from './extractModPhp';
 export * from './extractScript';
 export * from './extractServerType';
+export * from './supportsThumbnailHandler';
 export * from './isServerFullyDetected';
 export * from './normalizeArticlePath';
 export * from './servers';

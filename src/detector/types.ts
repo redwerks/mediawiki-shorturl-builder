@@ -30,4 +30,5 @@ export interface ServerData {
   servertype?: ServerType;
   hasroot?: boolean;
   modphp?: boolean;
+  thumbhandler?: boolean;
 }
