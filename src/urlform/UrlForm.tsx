@@ -24,7 +24,7 @@ export const UrlForm = (props: UrlFormProps) => {
   const { initialUrl } = props;
   const [query, setSearchParams] = useSearchParams({});
   const [submitting, setSubmitting] = useState(false);
-  const [url, setUrl] = useState(initialUrl ?? query.get('url'));
+  const [url, setUrl] = useState(initialUrl ?? query.get('url') ?? '');
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
