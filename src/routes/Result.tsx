@@ -1,9 +1,11 @@
-import { ServerData } from '../detector/types';
-import { isServerFullyDetected } from '../extractor';
-import { Layout } from '../layout/Layout';
-import { ServerConfigForm, ServerConfigFormValues } from '../instructions';
 import { useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { ServerData } from '../detector/types';
+import { isServerFullyDetected } from '../extractor';
+import { ServerConfigForm, ServerConfigFormValues } from '../instructions';
+import { ArticlePathForm } from '../instructions/ArticlePathForm';
+import { InstructionIntro } from '../instructions/InstructionIntro';
+import { Layout } from '../layout/Layout';
 
 export interface ResultRouteProps {
   serverData: ServerData;
@@ -14,6 +16,7 @@ export interface ResultRouteProps {
  */
 const ResultRoute = (props: ResultRouteProps) => {
   const { serverData } = props;
+
   const [, setSearchParams] = useSearchParams({});
 
   const submitServerConfig = useCallback(
@@ -51,7 +54,12 @@ const ResultRoute = (props: ResultRouteProps) => {
     );
   }
 
-  return <Layout>...</Layout>;
+  return (
+    <Layout>
+      <InstructionIntro serverData={serverData} />
+      <ArticlePathForm serverData={serverData} />
+    </Layout>
+  );
 };
 
 export default ResultRoute;
