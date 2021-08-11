@@ -3,8 +3,9 @@ import { useSearchParams } from 'react-router-dom';
 import { ServerData } from '../detector/types';
 import { isServerFullyDetected } from '../extractor';
 import { ServerConfigForm, ServerConfigFormValues } from '../instructions';
-import { ArticlePathForm } from '../instructions/ArticlePathForm';
-import { InstructionIntro } from '../instructions/InstructionIntro';
+import { ArticlePathForm } from '../instructions';
+import { InstructionIntro } from '../instructions';
+import { Instructions } from '../instructions';
 import { Layout } from '../layout/Layout';
 
 export interface ResultRouteProps {
@@ -58,6 +59,7 @@ const ResultRoute = (props: ResultRouteProps) => {
     <Layout>
       <InstructionIntro serverData={serverData} />
       <ArticlePathForm serverData={serverData} />
+      <Instructions serverData={serverData} />
     </Layout>
   );
 };
