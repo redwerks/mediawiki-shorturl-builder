@@ -1,4 +1,5 @@
 import invariant from 'invariant';
+import { createElement, Fragment, ReactElement } from 'react';
 import { ServerData } from '../detector/types';
 import {
   extractArticlePath,
@@ -6,11 +7,11 @@ import {
   extractScript,
   extractScriptExtension,
   extractServerType,
+  includeThumbnailHandler,
 } from '../extractor';
+import { CodeFile } from '../ui/CodeFile';
 import { InstructionData } from './makeInstructions';
 import { substEnd, substStart } from './utils/php-var-substitution';
-import { createElement } from 'react';
-import { CodeFile } from '../ui/CodeFile';
 
 /**
  * Generate LocalSettings variables
@@ -91,14 +92,35 @@ export function makeLocalSettings(serverData: ServerData): InstructionData {
     localSettingsCode += '$' + varName + ' = ' + val + ';\n';
   }
 
+  let code: ReactElement = createElement(CodeFile, {
+    type: 'php',
+    content: localSettingsCode,
+  });
+
+  if (includeThumbnailHandler(serverData)) {
+    const uploadSettings = `
+  ## To enable image uploads, make sure the 'images' directory
+  ## is writable, then set this to true:
+  $wgEnableUploads  = true;
+  $wgGenerateThumbnailOnParse = false;
+  `.replace(/^\s+/gm, '');
+
+    code = createElement(
+      Fragment,
+      {},
+      code,
+      createElement(CodeFile, {
+        type: 'php',
+        content: uploadSettings,
+      })
+    );
+  }
+
   return {
     type: 'file',
     syntax: 'php',
     name: `${serverData.scriptpath}/LocalSettings.php`,
-    content: createElement(CodeFile, {
-      type: 'php',
-      content: localSettingsCode,
-    }),
+    content: code,
     instruction: 'localsettings',
   };
 }

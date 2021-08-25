@@ -1,4 +1,5 @@
-import { ServerInstructions } from '../ServerInstructions';
+import invariant from 'invariant';
+import { createElement } from 'react';
 import {
   extractArticlePath,
   extractHashedUploads,
@@ -8,12 +9,12 @@ import {
   extractScriptPath,
   extractServerType,
 } from '../../extractor';
-import { relativePath } from '../../extractor/relativePath';
-import invariant from 'invariant';
-import { createElement } from 'react';
-import { CodeFile } from '../../ui/CodeFile';
-import { pathWithTail } from '../../extractor/pathWithTail';
 import { extractThumbPhp } from '../../extractor/extractThumbPhp';
+import { includeThumbnailHandler } from '../../extractor/includeThumbnailHandler';
+import { pathWithTail } from '../../extractor/pathWithTail';
+import { relativePath } from '../../extractor/relativePath';
+import { CodeFile } from '../../ui/CodeFile';
+import { ServerInstructions } from '../ServerInstructions';
 
 export const apache: ServerInstructions = {
   serverTypes: ['apache', 'litespeed'],
@@ -54,7 +55,7 @@ export const apache: ServerInstructions = {
     lines.push('');
 
     // Add Thumbnail Handler
-    if (serverData.thumbhandler ?? true) {
+    if (includeThumbnailHandler(serverData)) {
       const thumbPhp = extractThumbPhp(serverData);
 
       const scriptRoot = `^/?${pathWithTail(relativePath(scriptPath))}`;

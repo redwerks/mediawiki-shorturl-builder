@@ -16,3 +16,4 @@ export * from './pathWithTail';
 export * from './relativePath';
 export * from './servers';
 export * from './supportsThumbnailHandler';
+export * from './includeThumbnailHandler';
