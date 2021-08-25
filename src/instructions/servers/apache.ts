@@ -19,13 +19,13 @@ export const apache: ServerInstructions = {
   serverTypes: ['apache', 'litespeed'],
   addServerInstructions(serverData, instructions) {
     const serverType = extractServerType(serverData);
-    const articlePath = extractArticlePath(serverData);
+    const articlePath = extractArticlePath(serverData)?.replace('/$1', '');
     const script = extractScript(serverData);
     const scriptPath = extractScriptPath(serverData);
     const rootPath = extractRootPath(serverData);
     const hashedUploads = extractHashedUploads(serverData);
 
-    invariant(articlePath, 'articlepath was expected');
+    invariant(articlePath != null, 'articlepath was expected');
 
     const documentrootvar = '%{DOCUMENT_ROOT}';
     const lines = ['RewriteEngine On'];
@@ -39,7 +39,7 @@ export const apache: ServerInstructions = {
     } else {
       lines.push(
         `RewriteRule ^/?${relativePath(
-          articlePath.replace('/$1', '')
+          articlePath
         )}(/.*)?$ ${documentrootvar}${script} [L]`
       );
       if (articlePath !== scriptPath && rootPath !== scriptPath) {

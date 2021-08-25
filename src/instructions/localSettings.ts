@@ -24,7 +24,7 @@ export function makeLocalSettingsData(
 
   const localSettings: Record<string, string | boolean | undefined> = {};
 
-  invariant(serverData.scriptpath, 'scriptpath was expected');
+  invariant(serverData.scriptpath != null, 'scriptpath was expected');
 
   localSettings['wgScriptPath'] = serverData.scriptpath;
   localSettings['wgScriptExtension'] = scriptExt;
