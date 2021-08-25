@@ -31,4 +31,6 @@ export interface ServerData {
   hasroot?: boolean;
   modphp?: boolean;
   thumbhandler?: boolean;
+  fcgi_params?: string;
+  fcgi_pass?: string;
 }

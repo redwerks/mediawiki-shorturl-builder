@@ -1,4 +1,5 @@
 export * from './extractArticlePath';
+export * from './extractFcgi';
 export * from './extractHashedUploads';
 export * from './extractHasRoot';
 export * from './extractMainPage';
@@ -10,10 +11,10 @@ export * from './extractScriptExtension';
 export * from './extractScriptPath';
 export * from './extractServerType';
 export * from './extractThumbPhp';
+export * from './includeThumbnailHandler';
 export * from './isServerFullyDetected';
 export * from './normalizeArticlePath';
 export * from './pathWithTail';
 export * from './relativePath';
 export * from './servers';
 export * from './supportsThumbnailHandler';
-export * from './includeThumbnailHandler';

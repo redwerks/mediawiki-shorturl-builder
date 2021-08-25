@@ -11,6 +11,7 @@ import { includeThumbnailHandler } from '../../extractor/includeThumbnailHandler
 import { ServerInstructions } from '../ServerInstructions';
 import { createElement } from 'react';
 import { CodeFile } from '../../ui/CodeFile';
+import { extractFcgi } from '../../extractor/extractFcgi';
 
 export const nginx: ServerInstructions = {
   serverTypes: ['nginx'],
@@ -21,10 +22,9 @@ export const nginx: ServerInstructions = {
     const scriptExt = extractScriptExtension(serverData);
     const rootPath = extractRootPath(serverData);
     const hashedUploads = extractHashedUploads(serverData);
+    const { fcgiParams = '[...]', fcgiPass } = extractFcgi(serverData);
 
     const documentroot = '$document_root';
-    const fcgi_params = '[...]';
-    const fcgi_pass = '127.0.0.1:9000';
 
     const lines = [];
 
@@ -43,8 +43,8 @@ export const nginx: ServerInstructions = {
     lines.push(
       "			try_files $uri $uri/ =404; # Don't let php execute non-existent php files"
     );
-    lines.push(`			include ${fcgi_params};`);
-    lines.push(`			fastcgi_pass ${fcgi_pass};`);
+    lines.push(`			include ${fcgiParams};`);
+    lines.push(`			fastcgi_pass ${fcgiPass};`);
     lines.push('		}');
     lines.push('	}');
     lines.push('	');
@@ -95,10 +95,10 @@ export const nginx: ServerInstructions = {
     } else {
       lines.push(`	location ${articlePath} {`);
     }
-    lines.push(`		include ${fcgi_params};`);
+    lines.push(`		include ${fcgiParams};`);
     lines.push('		# article path should always be passed to index.php');
     lines.push(`		fastcgi_param SCRIPT_FILENAME	${documentroot}${script};`);
-    lines.push(`		fastcgi_pass  ${fcgi_pass};`);
+    lines.push(`		fastcgi_pass  ${fcgiPass};`);
     lines.push('	}');
     if (includeThumbnailHandler(serverData)) {
       const thumbPhp = extractThumbPhp(serverData);
@@ -123,9 +123,9 @@ export const nginx: ServerInstructions = {
       );
       lines.push('		');
       lines.push('		# Run the thumb.php script');
-      lines.push(`		include ${fcgi_params};`);
+      lines.push(`		include ${fcgiParams};`);
       lines.push(`		fastcgi_param SCRIPT_FILENAME	${documentroot}${thumbPhp};`);
-      lines.push(`		fastcgi_pass  ${fcgi_pass};`);
+      lines.push(`		fastcgi_pass  ${fcgiPass};`);
       lines.push('	}');
     }
     lines.push('	');
