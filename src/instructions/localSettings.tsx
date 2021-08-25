@@ -1,5 +1,5 @@
 import invariant from 'invariant';
-import { createElement, Fragment, ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { ServerData } from '../detector/types';
 import {
   extractArticlePath,
@@ -92,10 +92,17 @@ export function makeLocalSettings(serverData: ServerData): InstructionData {
     localSettingsCode += '$' + varName + ' = ' + val + ';\n';
   }
 
-  let code: ReactElement = createElement(CodeFile, {
-    type: 'php',
-    content: localSettingsCode,
-  });
+  let content: ReactElement = (
+    <>
+      <p>
+        This configuration is meant to go into your LocalSettings.php. There
+        should be a small block already in there that is similar to this,
+        replace that with these settings to setup the MediaWiki side of the
+        Short URL config.
+      </p>
+      <CodeFile type="php" content={localSettingsCode} />
+    </>
+  );
 
   if (includeThumbnailHandler(serverData)) {
     const uploadSettings = `
@@ -105,14 +112,11 @@ export function makeLocalSettings(serverData: ServerData): InstructionData {
   $wgGenerateThumbnailOnParse = false;
   `.replace(/^\s+/gm, '');
 
-    code = createElement(
-      Fragment,
-      {},
-      code,
-      createElement(CodeFile, {
-        type: 'php',
-        content: uploadSettings,
-      })
+    content = (
+      <>
+        {content}
+        <CodeFile type="php" content={uploadSettings} />
+      </>
     );
   }
 
@@ -120,7 +124,7 @@ export function makeLocalSettings(serverData: ServerData): InstructionData {
     type: 'file',
     syntax: 'php',
     name: `${serverData.scriptpath}/LocalSettings.php`,
-    content: code,
+    content,
     instruction: 'localsettings',
   };
 }
