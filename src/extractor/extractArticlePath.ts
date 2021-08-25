@@ -1,7 +1,7 @@
 import { ServerData } from '../detector/types';
 
 /**
- * Extract $wgHashedUploadDirectory from ServerData
+ * Extract $wgArticlePath from ServerData
  */
 export function extractArticlePath(serverData: ServerData): string | undefined {
   const { articlepath } = serverData;
