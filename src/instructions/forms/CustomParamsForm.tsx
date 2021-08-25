@@ -1,4 +1,3 @@
-import { Box } from '@material-ui/core';
 import { LoadingButton } from '@material-ui/lab';
 import { Form, Formik, FormikConfig } from 'formik';
 import { ReactNode, useCallback } from 'react';
@@ -56,15 +55,13 @@ export const CustomParamsForm = <Values extends FormikValues>(
       {({ isSubmitting }) => (
         <Form>
           {children}
-          <Box sx={{ marginTop: 2 }}>
-            <LoadingButton
-              type="submit"
-              variant="contained"
-              loading={isSubmitting}
-            >
-              {submitLabel}
-            </LoadingButton>
-          </Box>
+          <LoadingButton
+            type="submit"
+            variant="contained"
+            loading={isSubmitting}
+          >
+            {submitLabel}
+          </LoadingButton>
         </Form>
       )}
     </Formik>
