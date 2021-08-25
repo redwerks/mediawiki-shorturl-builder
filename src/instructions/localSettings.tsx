@@ -122,9 +122,7 @@ export function makeLocalSettings(serverData: ServerData): InstructionData {
 
   return {
     type: 'file',
-    syntax: 'php',
     name: `${serverData.scriptpath}/LocalSettings.php`,
     content,
-    instruction: 'localsettings',
   };
 }

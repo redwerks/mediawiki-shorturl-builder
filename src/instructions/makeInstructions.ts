@@ -5,10 +5,8 @@ import { addServerInstructions } from './servers';
 
 export interface InstructionData {
   type: 'file';
-  syntax: string;
   name: string;
   content: ReactElement;
-  instruction: 'localsettings' | 'apacheconfig' | 'htaccess' | 'nginxconfig';
 }
 
 /**

@@ -88,10 +88,8 @@ export const apache: ServerInstructions = {
 
       instructions.push({
         type: 'file',
-        syntax: 'apache',
         name: 'Apache Config',
         content,
-        instruction: 'apacheconfig',
       });
     } else {
       const content = (
@@ -109,10 +107,8 @@ export const apache: ServerInstructions = {
 
       instructions.push({
         type: 'file',
-        syntax: 'htaccess',
         name: `${rootPath}/.htaccess`,
         content,
-        instruction: 'htaccess',
       });
     }
   },

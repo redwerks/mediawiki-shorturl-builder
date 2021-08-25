@@ -205,10 +205,8 @@ export const nginx: ServerInstructions = {
 
     instructions.push({
       type: 'file',
-      syntax: 'nginx',
       name: 'nginx.conf',
       content,
-      instruction: 'nginxconfig',
     });
   },
 };
