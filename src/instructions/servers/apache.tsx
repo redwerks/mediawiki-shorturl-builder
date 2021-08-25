@@ -1,5 +1,4 @@
 import invariant from 'invariant';
-import { createElement } from 'react';
 import {
   extractArticlePath,
   extractHashedUploads,
@@ -76,25 +75,43 @@ export const apache: ServerInstructions = {
 
     if (extractHasRoot(serverData) && serverType === 'apache') {
       // If the article path is same as the script root or root then we can't use Alias and hence use the same rewrite rules as .htaccess
+      const content = (
+        <>
+          <p>
+            This configuration is meant to go the same block as whatever
+            VirtualHost or other directive you have your wiki's DocumentRoot,
+            ServerName, etc... already defined in.
+          </p>
+          <CodeFile type="apache" content={lines.join('\n')} />
+        </>
+      );
+
       instructions.push({
         type: 'file',
         syntax: 'apache',
         name: 'Apache Config',
-        content: createElement(CodeFile, {
-          type: 'apache',
-          content: lines.join('\n'),
-        }),
+        content,
         instruction: 'apacheconfig',
       });
     } else {
+      const content = (
+        <>
+          <p>
+            These rules go inside the .htaccess file at "
+            {`${rootPath}/.htaccess`}". If a .htaccess file already exists there
+            you should merge these rules in with it. However if you have any
+            existing rewrite rules for your article path or thumbnail handler
+            you should probably erase those to avoid conflicting with these.
+          </p>
+          <CodeFile type="htaccess" content={lines.join('\n')} />
+        </>
+      );
+
       instructions.push({
         type: 'file',
         syntax: 'htaccess',
         name: `${rootPath}/.htaccess`,
-        content: createElement(CodeFile, {
-          type: 'htaccess',
-          content: lines.join('\n'),
-        }),
+        content,
         instruction: 'htaccess',
       });
     }
