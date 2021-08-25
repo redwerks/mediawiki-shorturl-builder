@@ -8,7 +8,7 @@ export interface InstructionData {
   syntax: string;
   name: string;
   content: ReactElement;
-  instruction: 'localsettings';
+  instruction: 'localsettings' | 'apacheconfig' | 'htaccess';
 }
 
 /**
