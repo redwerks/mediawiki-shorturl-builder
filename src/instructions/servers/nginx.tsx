@@ -1,3 +1,4 @@
+import { useCallback, useMemo } from 'react';
 import {
   extractArticlePath,
   extractHashedUploads,
@@ -6,12 +7,56 @@ import {
   extractScriptExtension,
   extractScriptPath,
 } from '../../extractor';
+import { extractFcgi } from '../../extractor/extractFcgi';
 import { extractThumbPhp } from '../../extractor/extractThumbPhp';
 import { includeThumbnailHandler } from '../../extractor/includeThumbnailHandler';
-import { ServerInstructions } from '../ServerInstructions';
-import { createElement } from 'react';
+import { StringField } from '../../form';
 import { CodeFile } from '../../ui/CodeFile';
-import { extractFcgi } from '../../extractor/extractFcgi';
+import {
+  CustomParamsForm,
+  CustomParamsFormProps,
+} from '../forms/CustomParamsForm';
+import { ServerInstructions } from '../ServerInstructions';
+import { ServerData } from '../../detector/types';
+
+interface NginxParamsFormProps
+  extends Omit<
+    CustomParamsFormProps<NginxParamsValues>,
+    'initialValues' | 'update'
+  > {
+  fcgiParams: string;
+  fcgiPass: string;
+}
+
+interface NginxParamsValues {
+  fcgiParams: string;
+  fcgiPass: string;
+}
+
+const NginxParamsForm = (props: NginxParamsFormProps) => {
+  const { fcgiParams, fcgiPass, ...other } = props;
+
+  const initialValues = useMemo<NginxParamsValues>(() => {
+    return { fcgiParams, fcgiPass };
+  }, [fcgiParams, fcgiPass]);
+  const update = useCallback(
+    (values: NginxParamsValues): Partial<ServerData> => {
+      return {
+        fcgi_params: values.fcgiParams,
+        fcgi_pass: values.fcgiPass,
+      };
+    },
+    []
+  );
+
+  return (
+    <CustomParamsForm
+      {...other}
+      initialValues={initialValues}
+      update={update}
+    />
+  );
+};
 
 export const nginx: ServerInstructions = {
   serverTypes: ['nginx'],
@@ -133,14 +178,32 @@ export const nginx: ServerInstructions = {
     lines.push('}');
     lines.push('');
 
+    const content = (
+      <>
+        <p>
+          This snippet of code needs to know what fastcgi_pass to use for your
+          php configuration. You can replace the <code>fastcgi_pass [...]</code>{' '}
+          with a proper fastcgi_pass or fill in the value below and we'll give
+          you the configuration to use. If you have a fastcgi_params file that's
+          not in the typical location you can also specify it below.
+        </p>
+        <NginxParamsForm
+          {...{ serverData, fcgiParams, fcgiPass }}
+          submitLabel="Update"
+        >
+          <StringField label="fastcgi_pass" name="fcgiPass" />
+          <StringField label="fastcgi_params" name="fcgiParams" />
+        </NginxParamsForm>
+
+        <CodeFile type="nginx" content={lines.join('\n')} />
+      </>
+    );
+
     instructions.push({
       type: 'file',
       syntax: 'nginx',
       name: 'nginx.conf',
-      content: createElement(CodeFile, {
-        type: 'nginx',
-        content: lines.join('\n'),
-      }),
+      content,
       instruction: 'nginxconfig',
     });
   },
