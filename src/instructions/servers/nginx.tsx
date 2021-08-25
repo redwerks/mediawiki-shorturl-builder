@@ -181,6 +181,10 @@ export const nginx: ServerInstructions = {
     const content = (
       <>
         <p>
+          Use this configuration within your nginx configuration inside the
+          `server {}` you have already defined your MediaWiki installation in.
+        </p>
+        <p>
           This snippet of code needs to know what fastcgi_pass to use for your
           php configuration. You can replace the <code>fastcgi_pass [...]</code>{' '}
           with a proper fastcgi_pass or fill in the value below and we'll give
