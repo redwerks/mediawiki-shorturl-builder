@@ -7,6 +7,10 @@ import { ArticlePathForm } from '../instructions';
 import { InstructionIntro } from '../instructions';
 import { Instructions } from '../instructions';
 import { Layout } from '../layout/Layout';
+import { AccordionDetails, Typography } from '@material-ui/core';
+import { Accordion } from '@material-ui/core';
+import { AccordionSummary } from '@material-ui/core';
+import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 
 export interface ResultRouteProps {
   serverData: ServerData;
@@ -24,6 +28,11 @@ const ResultRoute = (props: ResultRouteProps) => {
     async (values: ServerConfigFormValues) => {
       const { url } = serverData;
 
+      const radioValue = (
+        value: 'on' | 'off' | undefined
+      ): boolean | undefined =>
+        value === 'on' ? true : value === 'off' ? false : undefined;
+
       setSearchParams(
         { url },
         {
@@ -34,7 +43,7 @@ const ResultRoute = (props: ResultRouteProps) => {
               servertype: values.server || undefined,
               script: values.script,
               hasheduploads: values.hasheduploads,
-              hasroot: values.hasRoot,
+              hasroot: radioValue(values.hasRoot),
               modphp: values.modPhp,
             } as ServerData,
           },
@@ -47,6 +56,9 @@ const ResultRoute = (props: ResultRouteProps) => {
   if (!isServerFullyDetected(serverData)) {
     return (
       <Layout>
+        <Typography component="h2" variant="subtitle2" gutterBottom>
+          Detected settings
+        </Typography>
         <ServerConfigForm
           serverData={serverData}
           onSubmit={submitServerConfig}
@@ -60,6 +72,17 @@ const ResultRoute = (props: ResultRouteProps) => {
       <InstructionIntro serverData={serverData} />
       <ArticlePathForm serverData={serverData} />
       <Instructions serverData={serverData} />
+      <Accordion>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>Detected settings</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <ServerConfigForm
+            serverData={serverData}
+            onSubmit={submitServerConfig}
+          />
+        </AccordionDetails>
+      </Accordion>
     </Layout>
   );
 };
