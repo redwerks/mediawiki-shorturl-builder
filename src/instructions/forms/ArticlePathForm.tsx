@@ -1,13 +1,13 @@
 import { Form, Formik } from 'formik';
 import { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ServerData } from '../detector/types';
+import { ServerData } from '../../detector/types';
 import {
   extractArticlePath,
   normalizeArticlePath,
   supportsThumbnailHandler,
-} from '../extractor';
-import { CheckboxField, StringField } from '../form';
+} from '../../extractor';
+import { CheckboxField, StringField } from '../../form';
 import { LoadingButton } from '@material-ui/lab';
 import { Box } from '@material-ui/core';
 

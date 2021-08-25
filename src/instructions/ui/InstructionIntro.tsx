@@ -1,6 +1,6 @@
-import { ServerData } from '../detector/types';
+import { ServerData } from '../../detector/types';
 import { Typography } from '@material-ui/core';
-import { extractArticlePath, extractMainPageUrl } from '../extractor';
+import { extractArticlePath, extractMainPageUrl } from '../../extractor';
 export interface InstructionIntroProps {
   serverData: ServerData;
 }

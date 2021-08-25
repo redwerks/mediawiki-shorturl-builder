@@ -10,7 +10,7 @@ import {
 import { LoadingButton } from '@material-ui/lab';
 import { Form, Formik, FormikConfig } from 'formik';
 import { useMemo } from 'react';
-import { ServerData } from '../detector/types';
+import { ServerData } from '../../detector/types';
 import {
   extractHashedUploads,
   extractHasRoot,
@@ -21,13 +21,13 @@ import {
   ServerType,
   serverTypes,
   supportedServers,
-} from '../extractor';
+} from '../../extractor';
 import {
   CheckboxField,
   RadioGroupField,
   SelectField,
   StringField,
-} from '../form';
+} from '../../form';
 
 const radioValue = (value: boolean | undefined): 'on' | 'off' | undefined =>
   typeof value === 'boolean' ? (value ? 'on' : 'off') : undefined;

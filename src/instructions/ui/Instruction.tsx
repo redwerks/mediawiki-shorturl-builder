@@ -1,5 +1,5 @@
 import { styled, Typography } from '@material-ui/core';
-import { InstructionData } from './makeInstructions';
+import { InstructionData } from '../makeInstructions';
 
 const InstructionRoot = styled('div', { name: 'Instruction', slot: 'Root' })(
   ({ theme }) => ({

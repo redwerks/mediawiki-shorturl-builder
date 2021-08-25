@@ -1,7 +1,7 @@
 import { styled } from '@material-ui/core';
 import { useMemo } from 'react';
-import { ServerData } from '../detector/types';
-import { makeInstructions } from './makeInstructions';
+import { ServerData } from '../../detector/types';
+import { makeInstructions } from '../makeInstructions';
 import { Instruction } from './Instruction';
 
 const InstructionsRoot = styled('div', { name: 'Instructions', slot: 'Root' })(
