@@ -13,6 +13,7 @@ import { Box } from '@material-ui/core';
 
 export interface ArticlePathFormValues {
   articlePath: string;
+  thumbHandler: boolean;
 }
 
 export interface ArticlePathFormProps {
@@ -35,6 +36,7 @@ export const ArticlePathForm = (props: ArticlePathFormProps) => {
             serverData: {
               ...serverData,
               articlepath: normalizeArticlePath(values.articlePath),
+              thumbhandler: values.thumbHandler,
             } as ServerData,
           },
         }

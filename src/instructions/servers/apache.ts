@@ -1,6 +1,7 @@
 import { ServerInstructions } from '../ServerInstructions';
 import {
   extractArticlePath,
+  extractHashedUploads,
   extractHasRoot,
   extractRootPath,
   extractScript,
@@ -11,6 +12,8 @@ import { relativePath } from '../../extractor/relativePath';
 import invariant from 'invariant';
 import { createElement } from 'react';
 import { CodeFile } from '../../ui/CodeFile';
+import { pathWithTail } from '../../extractor/pathWithTail';
+import { extractThumbPhp } from '../../extractor/extractThumbPhp';
 
 export const apache: ServerInstructions = {
   serverTypes: ['apache', 'litespeed'],
@@ -20,12 +23,14 @@ export const apache: ServerInstructions = {
     const script = extractScript(serverData);
     const scriptPath = extractScriptPath(serverData);
     const rootPath = extractRootPath(serverData);
+    const hashedUploads = extractHashedUploads(serverData);
 
     invariant(articlePath, 'articlepath was expected');
 
     const documentrootvar = '%{DOCUMENT_ROOT}';
     const lines = ['RewriteEngine On'];
 
+    // Add Rewrite Rules
     if (articlePath === rootPath) {
       // Root paths need special config
       lines.push('RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-f');
@@ -47,6 +52,26 @@ export const apache: ServerInstructions = {
       }
     }
     lines.push('');
+
+    // Add Thumbnail Handler
+    if (serverData.thumbhandler ?? true) {
+      const thumbPhp = extractThumbPhp(serverData);
+
+      const scriptRoot = `^/?${pathWithTail(relativePath(scriptPath))}`;
+      const hashedPath = hashedUploads ? '[0-9a-f]/[0-9a-f][0-9a-f]/' : '';
+      lines.push('RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-f');
+      lines.push('RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-d');
+      lines.push(
+        `RewriteRule ${scriptRoot}images/thumb/${hashedPath}([^/]+)/([0-9]+)px-.*$ ${documentrootvar}${thumbPhp}?f=$1&width=$2 [L,QSA,B]`
+      );
+      lines.push('');
+      lines.push('RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-f');
+      lines.push('RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-d');
+      lines.push(
+        `RewriteRule ${scriptRoot}images/thumb/archive/${hashedPath}([^/]+)/([0-9]+)px-.*$ ${documentrootvar}${thumbPhp}?f=$1&width=$2&archived=1 [L,QSA,B]`
+      );
+      lines.push('');
+    }
 
     if (extractHasRoot(serverData) && serverType === 'apache') {
       // If the article path is same as the script root or root then we can't use Alias and hence use the same rewrite rules as .htaccess
