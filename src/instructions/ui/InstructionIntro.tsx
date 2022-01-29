@@ -57,9 +57,11 @@ export const InstructionIntro = (props: InstructionIntroProps) => {
       <ErrorBox key="no-thumbnail-handler" severity="warning" sx={{ mb: 2 }}>
         We haven't implemented thumbnail handler rewrites for this server type
         yet. If you wish to experiment with implementing 404 thumbnail handlers
-        on your wiki, contact{' '}
-        <a href="mailto:daniel@redwerks.org">daniel@redwerks.org</a> after
-        you've configured normal short URLs on your wiki.
+        on your wiki, please get involved with the related{' '}
+        <a href="https://github.com/redwerks/mediawiki-shorturl-builder/issues/2">
+          GitHub issue
+        </a>{' '}
+        after you've configured normal short URLs on your wiki.
       </ErrorBox>
     );
   }

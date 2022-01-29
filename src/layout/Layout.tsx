@@ -65,7 +65,16 @@ export const Layout = (props: LayoutProps) => {
                 GitHub / Source
               </MuiLink>
             </li>
-            <li>React app written by Daniel at Redwerks</li>
+            <li>
+              React app written by{' '}
+              <MuiLink color="text.secondary" href="https://danf.ca/">
+                Daniel
+              </MuiLink>{' '}
+              at{' '}
+              <MuiLink color="text.secondary" href="https://redwerks.org/">
+                Redwerks
+              </MuiLink>
+            </li>
           </ul>
         </LayoutFooter>
       </LayoutContainer>
