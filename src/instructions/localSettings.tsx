@@ -106,11 +106,11 @@ export function makeLocalSettings(serverData: ServerData): InstructionData {
 
   if (includeThumbnailHandler(serverData)) {
     const uploadSettings = `
-  ## To enable image uploads, make sure the 'images' directory
-  ## is writable, then set this to true:
-  $wgEnableUploads  = true;
-  $wgGenerateThumbnailOnParse = false;
-  `.replace(/^\s+/gm, '');
+    ## To enable image uploads, make sure the 'images' directory
+    ## is writable, then set this to true:
+    $wgEnableUploads  = true;
+    $wgGenerateThumbnailOnParse = false;
+    `.replace(/^\s+/gm, '');
 
     content = (
       <>
