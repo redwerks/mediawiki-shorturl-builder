@@ -17,6 +17,7 @@ import { ServerInstructions } from '../ServerInstructions';
 
 export const apache: ServerInstructions = {
   serverTypes: ['apache', 'litespeed'],
+  hasThumbnailHandler: true,
   addServerInstructions(serverData, instructions) {
     const serverType = extractServerType(serverData);
     const articlePath = extractArticlePath(serverData)?.replace('/$1', '');

@@ -6,7 +6,8 @@ import {
   extractRootPath,
 } from '../../extractor';
 import { ErrorBox } from '../../error-message';
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
+import { serverSupportsThumbnails } from '../servers';
 export interface InstructionIntroProps {
   serverData: ServerData;
 }
@@ -17,11 +18,16 @@ export const InstructionIntro = (props: InstructionIntroProps) => {
   const mainPageUrl = extractMainPageUrl(serverData);
   const articlePath = extractArticlePath(serverData)?.replace('/$1', '');
   const rootPath = extractRootPath(serverData);
+  const hasThumbnailHandler = useMemo(
+    () => serverSupportsThumbnails(serverData),
+    [serverData]
+  );
 
-  let error: ReactNode = undefined;
+  let warning: ReactNode[] = [];
   if (articlePath === rootPath && articlePath === '/wiki') {
-    error = (
+    warning.push(
       <ErrorBox
+        key="installation-location"
         severity="warning"
         sx={{ mb: 2 }}
         title="Bad Installation Location"
@@ -46,9 +52,21 @@ export const InstructionIntro = (props: InstructionIntroProps) => {
     );
   }
 
+  if (!hasThumbnailHandler) {
+    warning.push(
+      <ErrorBox key="no-thumbnail-handler" severity="warning" sx={{ mb: 2 }}>
+        We haven't implemented thumbnail handler rewrites for this server type
+        yet. If you wish to experiment with implementing 404 thumbnail handlers
+        on your wiki, contact{' '}
+        <a href="mailto:daniel@redwerks.org">daniel@redwerks.org</a> after
+        you've configured normal short URLs on your wiki.
+      </ErrorBox>
+    );
+  }
+
   return (
     <>
-      {error}
+      {warning}
       <Typography variant="body1">
         These instructions can be used to configure the wiki at{' '}
         <a href={url} target="_blank" rel="noopener noreferrer nofollow">

@@ -23,6 +23,7 @@ function lighttpdValueQuote(val: unknown): string {
 }
 export const lighttpd: ServerInstructions = {
   serverTypes: ['lighttpd', 'lighttpd14'],
+  hasThumbnailHandler: true,
   addServerInstructions(serverData, instructions) {
     const serverType = extractServerType(serverData);
     const articlePath = extractArticlePath(serverData)?.replace('/$1', '');

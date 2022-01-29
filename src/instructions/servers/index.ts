@@ -5,8 +5,9 @@ import { nginx } from './nginx';
 import { ServerData } from '../../detector/types';
 import { InstructionData } from '../makeInstructions';
 import { extractServerType } from '../../extractor';
+import { ServerInstructions } from '../ServerInstructions';
 
-const serverInstructions = [apache, iis, lighttpd, nginx];
+const serverInstructions: ServerInstructions[] = [apache, iis, lighttpd, nginx];
 
 /**
  * Add per-server instructions
@@ -27,4 +28,23 @@ export function addServerInstructions(
       }
     }
   }
+}
+
+/**
+ * Check if we have a thumbnail handler rewrite for the server type
+ */
+export function serverSupportsThumbnails(serverData: ServerData): boolean {
+  const serverType = extractServerType(serverData);
+
+  if (serverType) {
+    for (const serverTypeInstructions of serverInstructions) {
+      if (serverTypeInstructions.serverTypes.includes(serverType)) {
+        if (serverTypeInstructions.hasThumbnailHandler) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
 }

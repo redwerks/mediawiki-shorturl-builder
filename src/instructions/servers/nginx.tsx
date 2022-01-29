@@ -60,6 +60,7 @@ const NginxParamsForm = (props: NginxParamsFormProps) => {
 
 export const nginx: ServerInstructions = {
   serverTypes: ['nginx'],
+  hasThumbnailHandler: true,
   addServerInstructions(serverData, instructions) {
     const articlePath = extractArticlePath(serverData)?.replace('/$1', '');
     const script = extractScript(serverData);
