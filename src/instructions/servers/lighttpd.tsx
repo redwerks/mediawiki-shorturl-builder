@@ -138,7 +138,7 @@ export const lighttpd: ServerInstructions = {
       <>
         <p>
           This config should be mixed in with the rest of your lighttpd
-          configuration. If you already wrap your MediaWiki\'s setup inside of a
+          configuration. If you already wrap your MediaWiki's setup inside of a
           block such as a <code>{'$HTTP["host"]'}</code> test then you should
           place this configuration inside of that block.
         </p>
