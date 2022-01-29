@@ -10,7 +10,7 @@ export * from './ErrorBox';
 export function getServerError(
   error: ServerError | ServerDetectionError
 ): ErrorBoxInfo {
-  if ('error' in error) {
+  if (typeof error === 'object' && 'error' in error) {
     return getServerStackError(error);
   } else {
     return getDetectionError(error);
