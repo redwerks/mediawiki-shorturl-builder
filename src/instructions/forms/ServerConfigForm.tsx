@@ -6,8 +6,8 @@ import {
   Paper,
   Radio,
   Typography,
-} from '@material-ui/core';
-import { LoadingButton } from '@material-ui/lab';
+} from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { Form, Formik, FormikConfig } from 'formik';
 import { useMemo } from 'react';
 import { ServerData } from '../../detector/types';

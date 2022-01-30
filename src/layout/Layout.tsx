@@ -5,7 +5,7 @@ import {
   Link as MuiLink,
   Typography,
   useTheme,
-} from '@material-ui/core';
+} from '@mui/material';
 import { ReactNode } from 'react';
 import { LayoutBody, LayoutFooter, LayoutHeader, LayoutLogo } from './ui';
 import { FeedbackTab } from './ui/FeedbackTab';

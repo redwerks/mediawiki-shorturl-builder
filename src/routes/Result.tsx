@@ -1,16 +1,22 @@
+import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Typography,
+} from '@mui/material';
 import { useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ServerData } from '../detector/types';
 import { isServerFullyDetected } from '../extractor';
-import { ServerConfigForm, ServerConfigFormValues } from '../instructions';
-import { ArticlePathForm } from '../instructions';
-import { InstructionIntro } from '../instructions';
-import { Instructions } from '../instructions';
+import {
+  ArticlePathForm,
+  InstructionIntro,
+  Instructions,
+  ServerConfigForm,
+  ServerConfigFormValues,
+} from '../instructions';
 import { Layout } from '../layout/Layout';
-import { AccordionDetails, Typography } from '@material-ui/core';
-import { Accordion } from '@material-ui/core';
-import { AccordionSummary } from '@material-ui/core';
-import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 
 export interface ResultRouteProps {
   serverData: ServerData;

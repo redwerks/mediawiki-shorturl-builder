@@ -1,5 +1,5 @@
-import { Box, experimentalStyled, TextField } from '@material-ui/core';
-import { LoadingButton } from '@material-ui/lab';
+import { Box, experimentalStyled, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import axios from 'axios';
 import invariant from 'invariant';
 import { FormEvent, useState } from 'react';

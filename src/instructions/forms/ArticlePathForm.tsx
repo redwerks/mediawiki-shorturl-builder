@@ -8,8 +8,8 @@ import {
   supportsThumbnailHandler,
 } from '../../extractor';
 import { CheckboxField, StringField } from '../../form';
-import { LoadingButton } from '@material-ui/lab';
-import { Box } from '@material-ui/core';
+import { LoadingButton } from '@mui/lab';
+import { Box } from '@mui/material';
 
 export interface ArticlePathFormValues {
   articlePath: string;

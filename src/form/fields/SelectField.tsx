@@ -1,4 +1,4 @@
-import { TextField, TextFieldProps } from '@material-ui/core';
+import { TextField, TextFieldProps } from '@mui/material';
 import { useField, UseFieldProps } from 'formik';
 import { useFieldDisabled } from './utils/useFieldDisabled';
 

@@ -1,5 +1,5 @@
 import { ServerData } from '../../detector/types';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import {
   extractArticlePath,
   extractMainPageUrl,

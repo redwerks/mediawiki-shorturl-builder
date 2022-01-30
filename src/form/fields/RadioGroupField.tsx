@@ -1,10 +1,10 @@
-import { FormHelperText } from '@material-ui/core';
+import { FormHelperText } from '@mui/material';
 import {
   FormControl,
   FormLabel,
   RadioGroup,
   RadioGroupProps,
-} from '@material-ui/core';
+} from '@mui/material';
 import { useField, UseFieldProps } from 'formik';
 import { ReactNode } from 'react';
 import { useFieldDisabled } from './utils/useFieldDisabled';

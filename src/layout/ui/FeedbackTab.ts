@@ -1,5 +1,5 @@
-import { experimentalStyled } from '@material-ui/core/styles';
-import { dark, light } from '@material-ui/core/styles/createPalette';
+import { experimentalStyled } from '@mui/material/styles';
+import { dark, light } from '@mui/material/styles/createPalette';
 
 export const FeedbackTab = experimentalStyled('a', {
   label: 'FeedbackTab',

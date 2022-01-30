@@ -1,7 +1,7 @@
 import '../syntax-highlighter/lighttpd';
 import { LightAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
 import sunburst from 'react-syntax-highlighter/dist/esm/styles/hljs/sunburst';
-import { styled } from '@material-ui/core';
+import { styled } from '@mui/material';
 
 const PreTag = styled('pre', { name: 'CodeFile', slot: 'PreTag' })(
   ({ theme }) => ({ borderRadius: theme.shape.borderRadius })

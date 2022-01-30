@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, styled } from '@material-ui/core';
+import { Alert, AlertTitle, styled } from '@mui/material';
 import { ComponentProps, ReactNode } from 'react';
 
 export const ErrorBoxRoot = styled(Alert, {

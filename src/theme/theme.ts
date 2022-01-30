@@ -1,4 +1,4 @@
-import { colors, createTheme, ThemeProvider } from '@material-ui/core';
+import { colors, createTheme, ThemeProvider } from '@mui/material';
 import { createElement, ReactNode, useMemo } from 'react';
 
 export interface ThemeRootProps {

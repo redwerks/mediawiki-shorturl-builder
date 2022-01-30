@@ -3,7 +3,7 @@ import {
   CheckboxProps,
   FormControlLabel,
   FormControlLabelProps,
-} from '@material-ui/core';
+} from '@mui/material';
 import { useField, UseFieldProps } from 'formik';
 import { useFieldDisabled } from './utils/useFieldDisabled';
 

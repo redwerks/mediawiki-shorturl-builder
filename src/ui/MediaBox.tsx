@@ -1,4 +1,4 @@
-import { experimentalStyled, Typography } from '@material-ui/core';
+import { experimentalStyled, Typography } from '@mui/material';
 import { ReactNode } from 'react';
 
 export const MediaBoxList = experimentalStyled('ul', { label: 'MediaBoxList' })(

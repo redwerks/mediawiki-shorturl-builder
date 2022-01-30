@@ -1,4 +1,4 @@
-import { LoadingButton } from '@material-ui/lab';
+import { LoadingButton } from '@mui/lab';
 import { Form, Formik, FormikConfig } from 'formik';
 import { ReactNode, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';

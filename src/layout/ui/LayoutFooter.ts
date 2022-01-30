@@ -1,4 +1,4 @@
-import { experimentalStyled } from '@material-ui/core/styles';
+import { experimentalStyled } from '@mui/material/styles';
 
 export const LayoutFooter = experimentalStyled('footer', {
   label: 'LayoutFooter',

@@ -1,5 +1,5 @@
-import { Container } from '@material-ui/core';
-import { experimentalStyled } from '@material-ui/core/styles';
+import { Container } from '@mui/material';
+import { experimentalStyled } from '@mui/material/styles';
 
 export const LayoutContainer = experimentalStyled(Container, {
   label: 'LayoutContainer',
