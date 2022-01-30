@@ -3,7 +3,8 @@ import { experimentalStyled } from '@material-ui/core/styles';
 export const LayoutBody = experimentalStyled('div', {
   label: 'LayoutBody',
 })(({ theme }) => ({
-  padding: `0 ${theme.spacing(2)}`,
+  padding: theme.spacing(0, 2),
+  paddingBottom: theme.spacing(2),
   margin: `${theme.spacing(3)} auto 0`,
   borderBottom: `1px solid ${theme.palette.divider}`,
   fontSize: '.9em',
