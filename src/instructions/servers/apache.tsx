@@ -102,7 +102,7 @@ export const apache: ServerInstructions = {
             existing rewrite rules for your article path or thumbnail handler
             you should probably erase those to avoid conflicting with these.
           </p>
-          <CodeFile type="htaccess" content={lines.join('\n')} />
+          <CodeFile type="apache" content={lines.join('\n')} />
         </>
       );
 
