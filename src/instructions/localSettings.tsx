@@ -11,7 +11,7 @@ import {
 } from '../extractor';
 import { CodeFile } from '../ui/CodeFile';
 import { InstructionData } from './makeInstructions';
-import { substEnd, substStart } from './utils/php-var-substitution';
+import { substStart } from './utils/php-var-substitution';
 
 /**
  * Generate LocalSettings variables
@@ -28,7 +28,6 @@ export function makeLocalSettingsData(
   invariant(serverData.scriptpath != null, 'scriptpath was expected');
 
   localSettings['wgScriptPath'] = serverData.scriptpath;
-  localSettings['wgScriptExtension'] = scriptExt;
   if (`${serverData.scriptpath}/index${scriptExt}` !== script) {
     localSettings['wgScript'] = script;
     // Use $wgScriptPath if present
@@ -41,14 +40,6 @@ export function makeLocalSettingsData(
 
   localSettings['wgArticlePath'] = extractArticlePath(serverData);
   invariant(localSettings['wgArticlePath'], 'articlepath was expected');
-  // Use $wgScriptExtension if present
-  if (typeof localSettings['wgScript'] === 'string') {
-    localSettings['wgScript'] = substEnd(
-      localSettings['wgScript'],
-      '{$wgScriptExtension}',
-      localSettings['wgScriptExtension']
-    );
-  }
   // Use $wgScriptPath if present
   if (localSettings['wgScriptPath']) {
     localSettings['wgArticlePath'] = substStart(
@@ -72,10 +63,11 @@ export function makeLocalSettingsData(
 export function makeLocalSettings(serverData: ServerData): InstructionData {
   const localSettings = makeLocalSettingsData(serverData);
   let localSettingsCode = `
-	## The URL base path to the directory containing the wiki;
-	## defaults for all runtime URL paths are based off of this.
-	## For more information on customizing the URLs please see:
-	## http://www.mediawiki.org/wiki/Manual:Short_URL
+  ## The URL base path to the directory containing the wiki;
+  ## defaults for all runtime URL paths are based off of this.
+  ## For more information on customizing the URLs
+  ## (like /w/index.php/Page_title to /wiki/Page_title) please see:
+  ## https://www.mediawiki.org/wiki/Manual:Short_URL
 	`.replace(/^\s+/gm, '');
   for (let [varName, val] of Object.entries(localSettings)) {
     if (val === undefined) continue;
@@ -110,7 +102,7 @@ export function makeLocalSettings(serverData: ServerData): InstructionData {
     const uploadSettings = `
     ## To enable image uploads, make sure the 'images' directory
     ## is writable, then set this to true:
-    $wgEnableUploads  = true;
+    $wgEnableUploads = true;
     $wgGenerateThumbnailOnParse = false;
     `.replace(/^\s+/gm, '');
 
