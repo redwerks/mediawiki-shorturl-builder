@@ -1,8 +1,7 @@
-import { Container } from '@mui/material';
-import { experimentalStyled } from '@mui/material/styles';
+import { Container, styled } from '@mui/material';
 
-export const LayoutContainer = experimentalStyled(Container, {
-  label: 'LayoutContainer',
+export const LayoutContainer = styled(Container, {
+  name: 'LayoutContainer',
 })(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
 }));

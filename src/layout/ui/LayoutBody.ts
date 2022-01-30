@@ -1,7 +1,7 @@
-import { experimentalStyled } from '@mui/material/styles';
+import { styled } from '@mui/material';
 
-export const LayoutBody = experimentalStyled('div', {
-  label: 'LayoutBody',
+export const LayoutBody = styled('div', {
+  name: 'LayoutBody',
 })(({ theme }) => ({
   padding: theme.spacing(0, 2),
   paddingBottom: theme.spacing(2),

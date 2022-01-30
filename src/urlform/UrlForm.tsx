@@ -1,20 +1,18 @@
-import { Box, experimentalStyled, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { Box, styled, TextField } from '@mui/material';
 import axios from 'axios';
 import invariant from 'invariant';
 import { FormEvent, useState } from 'react';
-import { apiDetect } from '../api';
 import { useSearchParams } from 'react-router-dom';
+import { apiDetect } from '../api';
 
-const UrlField = experimentalStyled(TextField, { label: 'UrlField' })(
-  ({ theme }) => ({
-    flex: 1,
-    '& .MuiOutlinedInput-input': {
-      ...theme.typography.body1,
-      padding: `${theme.spacing(1.5)} ${theme.spacing(2)}`,
-    },
-  })
-);
+const UrlField = styled(TextField, { name: 'UrlField' })(({ theme }) => ({
+  flex: 1,
+  '& .MuiOutlinedInput-input': {
+    ...theme.typography.body1,
+    padding: `${theme.spacing(1.5)} ${theme.spacing(2)}`,
+  },
+}));
 
 export interface UrlFormProps {
   initialUrl?: string;

@@ -1,7 +1,7 @@
-import { experimentalStyled } from '@mui/material/styles';
+import { styled } from '@mui/material';
 
-export const LayoutHeader = experimentalStyled('header', {
-  label: 'LayoutHeader',
+export const LayoutHeader = styled('header', {
+  name: 'LayoutHeader',
 })(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: `auto 1fr auto`,

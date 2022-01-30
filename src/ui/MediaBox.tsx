@@ -1,7 +1,7 @@
-import { experimentalStyled, Typography } from '@mui/material';
+import { styled, Typography } from '@mui/material';
 import { ReactNode } from 'react';
 
-export const MediaBoxList = experimentalStyled('ul', { label: 'MediaBoxList' })(
+export const MediaBoxList = styled('ul', { name: 'MediaBox', slot: 'List' })(
   ({ theme }) => ({
     display: 'inline-block',
     width: '100%',
@@ -12,7 +12,7 @@ export const MediaBoxList = experimentalStyled('ul', { label: 'MediaBoxList' })(
   })
 );
 
-const MediaBoxLi = experimentalStyled('li', { label: 'MediaBoxLi' })(
+const MediaBoxLi = styled('li', { name: 'MediaBox', slot: 'Li' })(
   ({ theme }) => ({
     display: 'grid',
 

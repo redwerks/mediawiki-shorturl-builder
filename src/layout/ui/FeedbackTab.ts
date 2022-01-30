@@ -1,8 +1,8 @@
-import { experimentalStyled } from '@mui/material/styles';
+import { styled } from '@mui/material';
 import { dark, light } from '@mui/material/styles/createPalette';
 
-export const FeedbackTab = experimentalStyled('a', {
-  label: 'FeedbackTab',
+export const FeedbackTab = styled('a', {
+  name: 'FeedbackTab',
 })(({ theme }) => ({
   position: 'fixed',
   bottom: 0,

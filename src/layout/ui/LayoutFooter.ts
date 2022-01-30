@@ -1,7 +1,7 @@
-import { experimentalStyled } from '@mui/material/styles';
+import { styled } from '@mui/material';
 
-export const LayoutFooter = experimentalStyled('footer', {
-  label: 'LayoutFooter',
+export const LayoutFooter = styled('footer', {
+  name: 'LayoutFooter',
 })(({ theme }) => ({
   display: 'inline-block',
   boxSizing: 'border-box',
