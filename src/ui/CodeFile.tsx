@@ -1,4 +1,5 @@
-import SyntaxHighlighter from 'react-syntax-highlighter';
+import '../syntax-highlighter/lighttpd';
+import { LightAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
 import sunburst from 'react-syntax-highlighter/dist/esm/styles/hljs/sunburst';
 
 export interface CodeFileProps {
@@ -13,7 +14,7 @@ export const CodeFile = (props: CodeFileProps) => {
   const { type, content } = props;
 
   return (
-    <SyntaxHighlighter language={type} style={sunburst}>
+    <SyntaxHighlighter language={type} style={sunburst} wrapLongLines>
       {content}
     </SyntaxHighlighter>
   );
