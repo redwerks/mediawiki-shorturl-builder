@@ -1,2 +1,8 @@
 [build]
 environment = { REACT_APP_API_BASE = "/.netlify/functions" }
+
+[context.deploy-preview.environment]
+REACT_APP_BUILD_VERSION = 'alpha'
+
+[context.branch-deploy.environment]
+REACT_APP_BUILD_VERSION = 'alpha'
