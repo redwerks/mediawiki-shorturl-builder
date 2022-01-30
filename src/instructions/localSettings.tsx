@@ -50,11 +50,13 @@ export function makeLocalSettingsData(
     );
   }
   // Use $wgScriptPath if present
-  localSettings['wgArticlePath'] = substStart(
-    localSettings['wgArticlePath'],
-    '{$wgScriptPath}/',
-    `${localSettings['wgScriptPath']}/`
-  );
+  if (localSettings['wgScriptPath']) {
+    localSettings['wgArticlePath'] = substStart(
+      localSettings['wgArticlePath'],
+      '{$wgScriptPath}/',
+      `${localSettings['wgScriptPath']}/`
+    );
+  }
 
   // Unless this is Apache with mod_php we need `$wgUsePathInfo = true;`
   if (!(serverType === 'apache' && (extractModPhp(serverData) ?? true))) {
