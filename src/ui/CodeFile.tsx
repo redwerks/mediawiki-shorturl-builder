@@ -6,7 +6,7 @@ import { styled } from '@mui/material';
 const PreTag = styled('pre', { name: 'CodeFile', slot: 'PreTag' })(
   ({ theme }) => ({ borderRadius: theme.shape.borderRadius })
 );
-const CodeTag = styled('code', { name: 'CodeFile', slot: 'CodeTag' })();
+const CodeTag = styled('code', { name: 'CodeFile', slot: 'CodeTag' })({});
 
 export interface CodeFileProps {
   type: string;
