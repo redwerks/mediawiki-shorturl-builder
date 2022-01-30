@@ -1,3 +1,6 @@
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import sunburst from 'react-syntax-highlighter/dist/esm/styles/hljs/sunburst';
+
 export interface CodeFileProps {
   type: string;
   content: string;
@@ -7,11 +10,11 @@ export interface CodeFileProps {
  * UI to display the contents of a code file
  */
 export const CodeFile = (props: CodeFileProps) => {
-  const { content } = props;
+  const { type, content } = props;
 
   return (
-    <pre>
-      <code>{content}</code>
-    </pre>
+    <SyntaxHighlighter language={type} style={sunburst}>
+      {content}
+    </SyntaxHighlighter>
   );
 };
