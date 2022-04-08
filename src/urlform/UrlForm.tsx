@@ -1,3 +1,4 @@
+import { useSafeState } from '@react-hookz/web';
 import { LoadingButton } from '@mui/lab';
 import { Box, styled, TextField } from '@mui/material';
 import axios from 'axios';
@@ -21,7 +22,7 @@ export interface UrlFormProps {
 export const UrlForm = (props: UrlFormProps) => {
   const { initialUrl } = props;
   const [query, setSearchParams] = useSearchParams({});
-  const [submitting, setSubmitting] = useState(false);
+  const [submitting, setSubmitting] = useSafeState(false);
   const [url, setUrl] = useState(initialUrl ?? query.get('url') ?? '');
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
