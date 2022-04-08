@@ -1,0 +1,86 @@
+% A list of reverse DNS patterns for hosts where the user likely has root access
+% i.e. non-shared hosting like VPS, cloud, dedicated, and personal servers
+% 
+% Percent sign (%) is a comment (TeX format is misused to get syntax highlighting for comments)
+% Each non-empty line is a reverse dns matching pattern
+% "example.net" with no starting period will only match "example.net"
+% ".example.net" will match "example.net" as well as and number of subdomains like "foo.example", "foo.bar.example.net", and so on
+% # will match any number of digits, e.g. "vps#" will match "vps1" and "vps1111", but not "vpsX"
+% * will match any character within  single part, i.e. "*.example.net" will match "foo.example.net" but not "foo.bar.example.net"
+% (a|b) will match either "a" or "b"
+
+% Special cases for VPS, Cloud Hosts, Dedicated Hosts, etc... these are usually root
+.static.cloud-ips.com % Rackspace and SliceHost?
+.wikimedia.org % Wikimedia's servers are naturally root
+.amazonaws.com % AWS users are usually a cloud VPS root
+.members.linode.com % Linode servers are also VPS root
+.ps#.dreamhost.com % Dreamhost's VPS servers use ps####.dreamhost.com
+.bc.googleusercontent.com % Google's compute instances?
+
+% Some other VPS, Cloud, and Dedicated hosts.
+.ip.secureserver.net
+.static.hostnoc.net
+.static.versaweb.net
+.static.intovps.com
+*-static.reverse.softlayer.com
+.demonvps.com
+.reverse.snakevirtual.com
+.virt.lolipop.jp
+.cloud.de-punkt.de
+.static.webnx.com
+
+% Other hosts that seem to distinguish their VPS with some chunk in the reverse DNS.
+.host*.superhosting.bg
+.vps-*.manage.myhosting.com
+.lvps*.vps.webfusion.co.uk
+.lvps*.dedicated.hosteurope.de
+.static-*.ctrls.in
+.virtual#.tentacle.fi
+.vps#.directvps.nl
+
+% Residential ISP users.
+% Users using their own internet connection naturally control the server.
+.cable.virginmedia.com
+.hsd#.or.comcast.net
+.hfc.comcastbusiness.net
+.dsl.teksavvy.com
+.onlinehome-server.com
+.rev.vodafone.pt
+.fios.verizon.net
+.dyn.optonline.net
+.aironetsp.ru
+.dynamic.3bb.co.th
+.dsl.iowatelecom.net
+.static.ziggozakelijk.nl
+.static.inode.at
+.wi.res.rr.com
+.catv.pool.telekom.hu
+.*.*.cox.net
+.*.*.comcast.net
+.cust.bredband2.com
+.unity-media.net
+.va.shawcable.net
+.range#-#.btcentralplus.com
+.static.dsl.siol.net
+.static.netspeed.net.nz
+.dyn.plus.net
+
+% Reverse DNS pointing to universities also presumably run their own servers
+.cnsm.csulb.edu
+.uwf.edu
+.ad.uwm.edu
+
+% OVH.net
+ns#.ovh.net
+(ns|ks)#.ip-#-#-#.(eu|net)
+#.ip-#-#-#.(eu|net)
+
+% Other (Unknown but reported)
+.kimsufi.com
+.secure.cloudis.com
+.cust.bluewin.ch
+static.#.#.#.#.clients.your-server.de
+.dip0.t-ipconnect.de
+port-#-#-#-#.dynamic.qsc.de
+.cloud.gwdg.de
+*-static-reverse.gooddomainregistry.com
