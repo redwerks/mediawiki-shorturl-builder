@@ -30,33 +30,40 @@ const ResultRoute = (props: ResultRouteProps) => {
 
   const [, setSearchParams] = useSearchParams({});
 
-  const submitServerConfig = useCallback(
-    async (values: ServerConfigFormValues) => {
+  const updateServerData = useCallback(
+    (cb: (serverData: ServerData) => ServerData) => {
       const { url } = serverData;
-
-      const radioValue = (
-        value: 'on' | 'off' | undefined
-      ): boolean | undefined =>
-        value === 'on' ? true : value === 'off' ? false : undefined;
 
       setSearchParams(
         { url },
         {
           state: {
             url,
-            serverData: {
-              ...serverData,
-              servertype: values.server || undefined,
-              script: values.script,
-              hasheduploads: values.hasheduploads,
-              hasroot: radioValue(values.hasRoot),
-              modphp: values.modPhp,
-            } as ServerData,
+            serverData: cb(serverData),
           },
         }
       );
     },
     [serverData, setSearchParams]
+  );
+
+  const submitServerConfig = useCallback(
+    async (values: ServerConfigFormValues) => {
+      const radioValue = (
+        value: 'on' | 'off' | undefined
+      ): boolean | undefined =>
+        value === 'on' ? true : value === 'off' ? false : undefined;
+
+      updateServerData((serverData) => ({
+        ...serverData,
+        servertype: values.server || undefined,
+        script: values.script,
+        hasheduploads: values.hasheduploads,
+        hasroot: radioValue(values.hasRoot),
+        modphp: values.modPhp,
+      }));
+    },
+    [updateServerData]
   );
 
   if (!isServerFullyDetected(serverData)) {
@@ -75,7 +82,10 @@ const ResultRoute = (props: ResultRouteProps) => {
 
   return (
     <Layout>
-      <InstructionIntro serverData={serverData} />
+      <InstructionIntro
+        serverData={serverData}
+        updateServerData={updateServerData}
+      />
       <ArticlePathForm serverData={serverData} />
       <Instructions serverData={serverData} />
       <Accordion>
