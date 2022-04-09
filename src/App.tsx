@@ -1,13 +1,16 @@
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ErrorPageBoundary } from './error/ErrorPage';
 import AppRoutes from './routes';
 import { ThemeRoot } from './theme';
 
 const App = () => {
   return (
     <ThemeRoot>
-      <Router>
-        <AppRoutes />
-      </Router>
+      <ErrorPageBoundary>
+        <Router>
+          <AppRoutes />
+        </Router>
+      </ErrorPageBoundary>
     </ThemeRoot>
   );
 };
