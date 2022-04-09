@@ -7,4 +7,7 @@ export default defineConfig({
   define: {
     'process.platform': '"browser"',
   },
+  build: {
+    sourcemap: true,
+  },
 });
