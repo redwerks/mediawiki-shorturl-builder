@@ -1,5 +1,10 @@
+[dev]
+environment = { VITE_API_BASE = "/.netlify/functions" }
+command = "npm start"
+
 [build]
-environment = { REACT_APP_API_BASE = "/.netlify/functions" }
+environment = { VITE_API_BASE = "/.netlify/functions" }
+command = "npm run build"
 
 [context.deploy-preview.environment]
 REACT_APP_BUILD_VERSION = 'alpha'

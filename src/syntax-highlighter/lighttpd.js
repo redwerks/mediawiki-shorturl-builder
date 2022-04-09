@@ -1,5 +1,5 @@
 import { LightAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
-import type {} from 'highlight.js';
+import 'highlight.js';
 
 function lighttpd() {
   var LIGHTTPD_IDENT_RE = '[-a-zA-Z.]+';
