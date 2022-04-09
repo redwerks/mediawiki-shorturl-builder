@@ -2,4 +2,5 @@ node_modules/
 package.json
 .npm-upgrade.json
 build/
+dist/
 serviceWorker.js
