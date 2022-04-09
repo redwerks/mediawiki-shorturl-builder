@@ -37,7 +37,10 @@ export const Layout = (props: LayoutProps) => {
         <LayoutHeader id="header">
           <LayoutLogo id="logo">
             <Box component="a" href="/">
-              <img alt="Redwerks" src="/resources/redwerks-blog-logo.png" />
+              <img
+                alt="Redwerks"
+                src="https://redwerksassets.s3.us-west-2.amazonaws.com/Redwerks/redwerks-legacy-header-logo.png"
+              />
               {isAlpha ? (
                 <span className="alpha-icon">αlpha</span>
               ) : (
