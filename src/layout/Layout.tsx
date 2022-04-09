@@ -20,7 +20,7 @@ export interface LayoutProps {
  */
 export const Layout = (props: LayoutProps) => {
   const { children } = props;
-  const isAlpha = import.meta.env.VITE_BUILD_VERSION === 'alpha';
+  const isAlpha = process.env.REACT_APP_BUILD_VERSION === 'alpha';
   const theme = useTheme();
 
   return (
